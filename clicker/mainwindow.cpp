@@ -6,6 +6,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    clicker = new Clicker(*ui->delay);
+    clicker->start();
+
 }
 
 MainWindow::~MainWindow()

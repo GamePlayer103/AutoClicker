@@ -46,6 +46,10 @@ public:
     QLabel *label_2;
     QLineEdit *activationChar;
     QSpacerItem *horizontalSpacer_2;
+    QHBoxLayout *horizontalLayout_6;
+    QLabel *label_5;
+    QRadioButton *toogle;
+    QRadioButton *hold;
     QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout_3;
     QPushButton *pushButton;
@@ -59,7 +63,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(264, 266);
+        MainWindow->resize(264, 293);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout_3 = new QVBoxLayout(centralwidget);
@@ -137,6 +141,27 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout_2);
 
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
+        label_5 = new QLabel(groupBox_2);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+
+        horizontalLayout_6->addWidget(label_5);
+
+        toogle = new QRadioButton(groupBox_2);
+        toogle->setObjectName(QString::fromUtf8("toogle"));
+        toogle->setChecked(true);
+
+        horizontalLayout_6->addWidget(toogle);
+
+        hold = new QRadioButton(groupBox_2);
+        hold->setObjectName(QString::fromUtf8("hold"));
+
+        horizontalLayout_6->addWidget(hold);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_6);
+
 
         verticalLayout_3->addWidget(groupBox_2);
 
@@ -195,6 +220,9 @@ public:
         doubleClick->setText(QCoreApplication::translate("MainWindow", "Double click", nullptr));
         groupBox_2->setTitle(QCoreApplication::translate("MainWindow", "Activation", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Activation key", nullptr));
+        label_5->setText(QCoreApplication::translate("MainWindow", "Activation mode", nullptr));
+        toogle->setText(QCoreApplication::translate("MainWindow", "Toogle", nullptr));
+        hold->setText(QCoreApplication::translate("MainWindow", "Hold", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
         pushButton_2->setText(QCoreApplication::translate("MainWindow", "Stop", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "Status: ", nullptr));

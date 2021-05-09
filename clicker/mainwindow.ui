@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>264</width>
-    <height>266</height>
+    <height>293</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -120,6 +120,34 @@
             </size>
            </property>
           </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Activation mode</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="toogle">
+           <property name="text">
+            <string>Toogle</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="hold">
+           <property name="text">
+            <string>Hold</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>

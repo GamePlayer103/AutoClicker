@@ -23,6 +23,7 @@ private:
     QLineEdit *activationChar;
     bool isRunning;
     int clickType;
+    int activationMode;
 
 private slots:
     void click();
@@ -30,6 +31,7 @@ private slots:
 
 public slots:
     void setClickType(int type);
+    void setActivationMode(int mode);
 
 };
 

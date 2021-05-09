@@ -26,3 +26,13 @@ void MainWindow::on_doubleClick_clicked()
 {
     clicker->setClickType(2);
 }
+
+void MainWindow::on_toogle_clicked()
+{
+    clicker->setActivationMode(1);
+}
+
+void MainWindow::on_hold_clicked()
+{
+    clicker->setActivationMode(2);
+}

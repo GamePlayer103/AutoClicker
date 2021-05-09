@@ -13,7 +13,18 @@ Clicker::Clicker(QSpinBox &delay, QLineEdit &activationKey)
     connect(checkTimer, SIGNAL(timeout()), this, SLOT(check()));
 
     isRunning = false;
+
+    /* click type
+     * 1 = single click
+     * 2 = double click
+     */
     clickType = 1;
+
+    /* activation mode
+     * 1 = toogle
+     * 2 = hold
+     */
+    activationMode = 1;
 }
 
 void Clicker::start()
@@ -46,21 +57,52 @@ void Clicker::check()
     const char *c_str = ba.data();
     char ch = c_str[0];
 
-    //check than activate button button is clicked
-    if(GetAsyncKeyState(VkKeyScanA(ch)))
+    if(activationMode == 1)
     {
-        qDebug() << "Activate key clicked";
-        if(isRunning)
+        if(checkTimer->interval() != 250)
+            checkTimer->setInterval(250);
+
+        if(GetAsyncKeyState(VkKeyScanA(ch)))
         {
-            isRunning = false;
-            clickTimer->stop();
-            qDebug() << "Click timer stopped";
+            qDebug() << "Activate key clicked";
+            if(isRunning)
+            {
+                isRunning = false;
+                clickTimer->stop();
+                qDebug() << "Click timer stopped";
+            }
+            else
+            {
+                isRunning = true;
+                clickTimer->start();
+                qDebug() << "Click timer started";
+            }
+        }
+    }
+
+    if(activationMode == 2)
+    {
+        if(checkTimer->interval() != 50)
+            checkTimer->setInterval(50);
+
+        if(GetAsyncKeyState(VkKeyScanA(ch)))
+        {
+            qDebug() << "Activate key hold";
+            if(isRunning == false)
+            {
+                isRunning = true;
+                clickTimer->start();
+                qDebug() << "Click timer started";
+            }
         }
         else
         {
-            isRunning = true;
-            clickTimer->start();
-            qDebug() << "Click timer started";
+            if(isRunning == true)
+            {
+                isRunning = false;
+                clickTimer->stop();
+                qDebug() << "Click timer stopped";
+            }
         }
     }
 }
@@ -69,4 +111,10 @@ void Clicker::setClickType(int type)
 {
     clickType = type;
     qDebug() << "Set click type to: " << type;
+}
+
+void Clicker::setActivationMode(int mode)
+{
+    activationMode = mode;
+    qDebug() << "Set activation mode to: " << mode;
 }

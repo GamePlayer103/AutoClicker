@@ -21,6 +21,10 @@ private slots:
 
     void on_doubleClick_clicked();
 
+    void on_toogle_clicked();
+
+    void on_hold_clicked();
+
 private:
     Ui::MainWindow *ui;
     Clicker *clicker;

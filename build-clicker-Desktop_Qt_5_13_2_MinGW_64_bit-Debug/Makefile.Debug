@@ -19,13 +19,13 @@ CXXFLAGS      = -fno-keep-inline-dllexport -g -std=gnu++11 -Wall -W -Wextra -fex
 INCPATH       = -I..\clicker -I. -IC:\Qt\Qt5.13.2\5.13.2\mingw73_64\include -IC:\Qt\Qt5.13.2\5.13.2\mingw73_64\include\QtWidgets -IC:\Qt\Qt5.13.2\5.13.2\mingw73_64\include\QtGui -IC:\Qt\Qt5.13.2\5.13.2\mingw73_64\include\QtANGLE -IC:\Qt\Qt5.13.2\5.13.2\mingw73_64\include\QtCore -Idebug -I. -I/include -IC:\Qt\Qt5.13.2\5.13.2\mingw73_64\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,windows -mthreads
-LIBS        =        C:\Qt\Qt5.13.2\5.13.2\mingw73_64\lib\libQt5Widgetsd.a C:\Qt\Qt5.13.2\5.13.2\mingw73_64\lib\libQt5Guid.a C:\Qt\Qt5.13.2\5.13.2\mingw73_64\lib\libQt5Cored.a  -lmingw32 C:\Qt\Qt5.13.2\5.13.2\mingw73_64\lib\libqtmaind.a -LC:\openssl\lib -LC:\Utils\my_sql\mysql-5.7.25-winx64\lib -LC:\Utils\postgresql\pgsql\lib -lshell32 
+LIBS        =        C:\Qt\Qt5.13.2\5.13.2\mingw73_64\lib\libQt5Widgetsd.a C:\Qt\Qt5.13.2\5.13.2\mingw73_64\lib\libQt5Guid.a C:\Qt\Qt5.13.2\5.13.2\mingw73_64\lib\libQt5Cored.a debug\clicker_resource_res.o  -lmingw32 C:\Qt\Qt5.13.2\5.13.2\mingw73_64\lib\libqtmaind.a -LC:\openssl\lib -LC:\Utils\my_sql\mysql-5.7.25-winx64\lib -LC:\Utils\postgresql\pgsql\lib -lshell32 
 QMAKE         = C:\Qt\Qt5.13.2\5.13.2\mingw73_64\bin\qmake.exe
 IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = debug\clicker_resource_res.o
 COPY          = copy /y
 SED           = $(QMAKE) -install sed
 COPY_FILE     = copy /y
@@ -77,8 +77,11 @@ DESTDIR_TARGET = debug\clicker.exe
 first: all
 all: Makefile.Debug  debug/clicker.exe
 
-debug/clicker.exe: C:/Qt/Qt5.13.2/5.13.2/mingw73_64/lib/libQt5Widgetsd.a C:/Qt/Qt5.13.2/5.13.2/mingw73_64/lib/libQt5Guid.a C:/Qt/Qt5.13.2/5.13.2/mingw73_64/lib/libQt5Cored.a C:/Qt/Qt5.13.2/5.13.2/mingw73_64/lib/libqtmaind.a ui_mainwindow.h $(OBJECTS) 
+debug/clicker.exe: C:/Qt/Qt5.13.2/5.13.2/mingw73_64/lib/libQt5Widgetsd.a C:/Qt/Qt5.13.2/5.13.2/mingw73_64/lib/libQt5Guid.a C:/Qt/Qt5.13.2/5.13.2/mingw73_64/lib/libQt5Cored.a C:/Qt/Qt5.13.2/5.13.2/mingw73_64/lib/libqtmaind.a ui_mainwindow.h $(OBJECTS) debug/clicker_resource_res.o
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) $(OBJECTS)  $(LIBS)
+
+debug/clicker_resource_res.o: clicker_resource.rc
+	windres -i clicker_resource.rc -o debug\clicker_resource_res.o --include-dir=. $(DEFINES)
 
 qmake: FORCE
 	@$(QMAKE) -o Makefile.Debug ..\clicker\clicker.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -90,6 +93,7 @@ dist:
 
 clean: compiler_clean 
 	-$(DEL_FILE) debug\clicker.o debug\main.o debug\mainwindow.o debug\settings.o debug\moc_clicker.o debug\moc_mainwindow.o debug\moc_settings.o
+	-$(DEL_FILE) debug\clicker_resource_res.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -348,6 +352,7 @@ debug/moc_mainwindow.cpp: ../clicker/mainwindow.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtGui/qtouchdevice.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtWidgets/qtabwidget.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtGui/qicon.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtGui/QCloseEvent \
 		../clicker/clicker.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QObject \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QTimer \
@@ -366,6 +371,18 @@ debug/moc_mainwindow.cpp: ../clicker/mainwindow.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtGui/qpen.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtGui/qtextoption.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QDebug \
+		../clicker/settings.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QFile \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QTextStream \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonArray \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qjsonarray.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qjsonvalue.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonDocument \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qjsondocument.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonObject \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qjsonobject.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonParseError \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonValue \
 		debug/moc_predefs.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/bin/moc.exe
 	C:\Qt\Qt5.13.2\5.13.2\mingw73_64\bin\moc.exe $(DEFINES) --include E:/programowanie/projekty/AutoClicker/build-clicker-Desktop_Qt_5_13_2_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/Qt5.13.2/5.13.2/mingw73_64/mkspecs/win32-g++ -IE:/programowanie/projekty/AutoClicker/clicker -IC:/Qt/Qt5.13.2/5.13.2/mingw73_64/include -IC:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtWidgets -IC:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtGui -IC:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtANGLE -IC:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore -I. -IC:/Qt/Qt5.13.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Qt5.13.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Qt5.13.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Qt5.13.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Qt5.13.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Qt5.13.2/Tools/mingw730_64/x86_64-w64-mingw32/include ..\clicker\mainwindow.h -o debug\moc_mainwindow.cpp
@@ -427,19 +444,18 @@ debug/moc_settings.cpp: ../clicker/settings.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qfile.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qfiledevice.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qiodevice.h \
-		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QDebug \
-		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qdebug.h \
-		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qhash.h \
-		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qmap.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QTextStream \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qtextstream.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qlocale.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qvariant.h \
-		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qshareddata.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qmap.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qdebug.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qhash.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qset.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qcontiguouscache.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qsharedpointer.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qshareddata.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qsharedpointer_impl.h \
-		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QTextStream \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonArray \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qjsonarray.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qjsonvalue.h \
@@ -449,6 +465,7 @@ debug/moc_settings.cpp: ../clicker/settings.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qjsonobject.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonParseError \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonValue \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QDebug \
 		debug/moc_predefs.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/bin/moc.exe
 	C:\Qt\Qt5.13.2\5.13.2\mingw73_64\bin\moc.exe $(DEFINES) --include E:/programowanie/projekty/AutoClicker/build-clicker-Desktop_Qt_5_13_2_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/Qt5.13.2/5.13.2/mingw73_64/mkspecs/win32-g++ -IE:/programowanie/projekty/AutoClicker/clicker -IC:/Qt/Qt5.13.2/5.13.2/mingw73_64/include -IC:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtWidgets -IC:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtGui -IC:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtANGLE -IC:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore -I. -IC:/Qt/Qt5.13.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Qt5.13.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Qt5.13.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Qt5.13.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Qt5.13.2/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Qt5.13.2/Tools/mingw730_64/x86_64-w64-mingw32/include ..\clicker\settings.h -o debug\moc_settings.cpp
@@ -705,6 +722,7 @@ debug/main.o: ../clicker/main.cpp ../clicker/mainwindow.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtGui/qtouchdevice.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtWidgets/qtabwidget.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtGui/qicon.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtGui/QCloseEvent \
 		../clicker/clicker.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QObject \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QTimer \
@@ -723,6 +741,18 @@ debug/main.o: ../clicker/main.cpp ../clicker/mainwindow.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtGui/qpen.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtGui/qtextoption.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QDebug \
+		../clicker/settings.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QFile \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QTextStream \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonArray \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qjsonarray.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qjsonvalue.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonDocument \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qjsondocument.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonObject \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qjsonobject.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonParseError \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonValue \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtWidgets/QApplication \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtWidgets/qapplication.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qcoreapplication.h \
@@ -839,6 +869,7 @@ debug/mainwindow.o: ../clicker/mainwindow.cpp ../clicker/mainwindow.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtGui/qtouchdevice.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtWidgets/qtabwidget.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtGui/qicon.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtGui/QCloseEvent \
 		../clicker/clicker.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QObject \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QTimer \
@@ -857,8 +888,21 @@ debug/mainwindow.o: ../clicker/mainwindow.cpp ../clicker/mainwindow.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtGui/qpen.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtGui/qtextoption.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QDebug \
+		../clicker/settings.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QFile \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QTextStream \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonArray \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qjsonarray.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qjsonvalue.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonDocument \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qjsondocument.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonObject \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qjsonobject.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonParseError \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonValue \
 		ui_mainwindow.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QVariant \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtGui/QIcon \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtWidgets/QApplication \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtWidgets/qapplication.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qcoreapplication.h \
@@ -944,19 +988,18 @@ debug/settings.o: ../clicker/settings.cpp ../clicker/settings.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qfile.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qfiledevice.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qiodevice.h \
-		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QDebug \
-		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qdebug.h \
-		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qhash.h \
-		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qmap.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QTextStream \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qtextstream.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qlocale.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qvariant.h \
-		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qshareddata.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qmap.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qdebug.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qhash.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qset.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qcontiguouscache.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qsharedpointer.h \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qshareddata.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qsharedpointer_impl.h \
-		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QTextStream \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonArray \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qjsonarray.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qjsonvalue.h \
@@ -965,7 +1008,8 @@ debug/settings.o: ../clicker/settings.cpp ../clicker/settings.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonObject \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/qjsonobject.h \
 		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonParseError \
-		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonValue
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QJsonValue \
+		C:/Qt/Qt5.13.2/5.13.2/mingw73_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\settings.o ..\clicker\settings.cpp
 
 debug/moc_clicker.o: debug/moc_clicker.cpp 

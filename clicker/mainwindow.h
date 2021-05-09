@@ -25,6 +25,10 @@ private slots:
 
     void on_hold_clicked();
 
+    void on_start_clicked();
+
+    void on_stop_clicked();
+
 private:
     Ui::MainWindow *ui;
     Clicker *clicker;

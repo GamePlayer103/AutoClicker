@@ -7,8 +7,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     clicker = new Clicker(*ui->delay, *ui->activationChar);
-    clicker->start();
-
+    ui->limit->setEnabled(false);
+    connect(ui->enableLimit, SIGNAL(toggled(bool)), clicker, SLOT(enableClickLimit(bool)));
+    connect(ui->limit, SIGNAL(valueChanged(int)), clicker, SLOT(setClickLimit(int)));
 }
 
 MainWindow::~MainWindow()
@@ -35,4 +36,16 @@ void MainWindow::on_toogle_clicked()
 void MainWindow::on_hold_clicked()
 {
     clicker->setActivationMode(2);
+}
+
+void MainWindow::on_start_clicked()
+{
+    clicker->start();
+    ui->status->setText("Started");
+}
+
+void MainWindow::on_stop_clicked()
+{
+    clicker->stop();
+    ui->status->setText("Stopped");
 }

@@ -15,6 +15,7 @@ class Clicker : public QObject
 public:
     Clicker(QSpinBox &delay, QLineEdit &activationKey);
     void start();
+    void stop();
 
 private:
     QTimer *clickTimer;
@@ -24,6 +25,9 @@ private:
     bool isRunning;
     int clickType;
     int activationMode;
+    int clickLimit;
+    bool isLimitEnabled;
+    int clicks;
 
 private slots:
     void click();
@@ -32,7 +36,8 @@ private slots:
 public slots:
     void setClickType(int type);
     void setActivationMode(int mode);
-
+    void setClickLimit(int limit);
+    void enableClickLimit(bool enable);
 };
 
 #endif // CLICKER_H

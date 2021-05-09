@@ -25,6 +25,14 @@ Clicker::Clicker(QSpinBox &delay, QLineEdit &activationKey)
      * 2 = hold
      */
     activationMode = 1;
+
+    isLimitEnabled = false;
+}
+
+void Clicker::stop()
+{
+    checkTimer->stop();
+    clickTimer->stop();
 }
 
 void Clicker::start()
@@ -35,6 +43,15 @@ void Clicker::start()
 
 void Clicker::click()
 {
+    if(isLimitEnabled)
+    {
+        if(clickLimit <= clicks)
+        {
+            qDebug() << "Limit reached";
+            return;
+        }
+    }
+
     //set delay
     if(delaySpinBox->value() != clickTimer->interval())
         clickTimer->setInterval(delaySpinBox->value());
@@ -47,6 +64,7 @@ void Clicker::click()
         qDebug() << "Clicked, current delay is: " << delaySpinBox->value();
     }
 
+    clicks ++;
 }
 
 void Clicker::check()
@@ -73,6 +91,7 @@ void Clicker::check()
             }
             else
             {
+                clicks = 0;
                 isRunning = true;
                 clickTimer->start();
                 qDebug() << "Click timer started";
@@ -90,6 +109,7 @@ void Clicker::check()
             qDebug() << "Activate key hold";
             if(isRunning == false)
             {
+                clicks = 0;
                 isRunning = true;
                 clickTimer->start();
                 qDebug() << "Click timer started";
@@ -117,4 +137,16 @@ void Clicker::setActivationMode(int mode)
 {
     activationMode = mode;
     qDebug() << "Set activation mode to: " << mode;
+}
+
+void Clicker::setClickLimit(int limit)
+{
+    clickLimit = limit;
+    qDebug() << "Set click limit to: " << limit;
+}
+
+void Clicker::enableClickLimit(bool enable)
+{
+    isLimitEnabled = enable;
+    qDebug() << "Set click limit enabled to: " << enable;
 }

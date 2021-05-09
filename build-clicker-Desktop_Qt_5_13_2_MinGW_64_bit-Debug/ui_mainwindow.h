@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
@@ -40,6 +41,11 @@ public:
     QLabel *label_3;
     QRadioButton *singleClick;
     QRadioButton *doubleClick;
+    QCheckBox *enableLimit;
+    QHBoxLayout *horizontalLayout_7;
+    QLabel *label_6;
+    QSpinBox *limit;
+    QSpacerItem *horizontalSpacer_4;
     QGroupBox *groupBox_2;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_2;
@@ -52,8 +58,8 @@ public:
     QRadioButton *hold;
     QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout_3;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
+    QPushButton *start;
+    QPushButton *stop;
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_4;
     QLabel *status;
@@ -63,7 +69,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(264, 293);
+        MainWindow->resize(264, 350);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout_3 = new QVBoxLayout(centralwidget);
@@ -113,6 +119,31 @@ public:
 
 
         verticalLayout->addLayout(horizontalLayout_5);
+
+        enableLimit = new QCheckBox(groupBox);
+        enableLimit->setObjectName(QString::fromUtf8("enableLimit"));
+
+        verticalLayout->addWidget(enableLimit);
+
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
+        label_6 = new QLabel(groupBox);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+
+        horizontalLayout_7->addWidget(label_6);
+
+        limit = new QSpinBox(groupBox);
+        limit->setObjectName(QString::fromUtf8("limit"));
+        limit->setMaximum(10000);
+
+        horizontalLayout_7->addWidget(limit);
+
+        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_7->addItem(horizontalSpacer_4);
+
+
+        verticalLayout->addLayout(horizontalLayout_7);
 
 
         verticalLayout_3->addWidget(groupBox);
@@ -171,15 +202,15 @@ public:
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        pushButton = new QPushButton(centralwidget);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        start = new QPushButton(centralwidget);
+        start->setObjectName(QString::fromUtf8("start"));
 
-        horizontalLayout_3->addWidget(pushButton);
+        horizontalLayout_3->addWidget(start);
 
-        pushButton_2 = new QPushButton(centralwidget);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        stop = new QPushButton(centralwidget);
+        stop->setObjectName(QString::fromUtf8("stop"));
 
-        horizontalLayout_3->addWidget(pushButton_2);
+        horizontalLayout_3->addWidget(stop);
 
 
         verticalLayout_3->addLayout(horizontalLayout_3);
@@ -206,6 +237,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
 
         retranslateUi(MainWindow);
+        QObject::connect(enableLimit, SIGNAL(toggled(bool)), limit, SLOT(setEnabled(bool)));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -218,15 +250,17 @@ public:
         label_3->setText(QCoreApplication::translate("MainWindow", "Clicks type", nullptr));
         singleClick->setText(QCoreApplication::translate("MainWindow", "Single click", nullptr));
         doubleClick->setText(QCoreApplication::translate("MainWindow", "Double click", nullptr));
+        enableLimit->setText(QCoreApplication::translate("MainWindow", "Enable click limit", nullptr));
+        label_6->setText(QCoreApplication::translate("MainWindow", "Maximum clicks", nullptr));
         groupBox_2->setTitle(QCoreApplication::translate("MainWindow", "Activation", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Activation key", nullptr));
         label_5->setText(QCoreApplication::translate("MainWindow", "Activation mode", nullptr));
         toogle->setText(QCoreApplication::translate("MainWindow", "Toogle", nullptr));
         hold->setText(QCoreApplication::translate("MainWindow", "Hold", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("MainWindow", "Stop", nullptr));
+        start->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
+        stop->setText(QCoreApplication::translate("MainWindow", "Stop", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "Status: ", nullptr));
-        status->setText(QString());
+        status->setText(QCoreApplication::translate("MainWindow", "Stopped", nullptr));
     } // retranslateUi
 
 };

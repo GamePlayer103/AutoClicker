@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Clicker_t {
-    QByteArrayData data[8];
-    char stringdata0[62];
+    QByteArrayData data[12];
+    char stringdata0[106];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,11 +39,16 @@ QT_MOC_LITERAL(3, 15, 5), // "check"
 QT_MOC_LITERAL(4, 21, 12), // "setClickType"
 QT_MOC_LITERAL(5, 34, 4), // "type"
 QT_MOC_LITERAL(6, 39, 17), // "setActivationMode"
-QT_MOC_LITERAL(7, 57, 4) // "mode"
+QT_MOC_LITERAL(7, 57, 4), // "mode"
+QT_MOC_LITERAL(8, 62, 13), // "setClickLimit"
+QT_MOC_LITERAL(9, 76, 5), // "limit"
+QT_MOC_LITERAL(10, 82, 16), // "enableClickLimit"
+QT_MOC_LITERAL(11, 99, 6) // "enable"
 
     },
     "Clicker\0click\0\0check\0setClickType\0"
-    "type\0setActivationMode\0mode"
+    "type\0setActivationMode\0mode\0setClickLimit\0"
+    "limit\0enableClickLimit\0enable"
 };
 #undef QT_MOC_LITERAL
 
@@ -53,7 +58,7 @@ static const uint qt_meta_data_Clicker[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -61,16 +66,20 @@ static const uint qt_meta_data_Clicker[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   34,    2, 0x08 /* Private */,
-       3,    0,   35,    2, 0x08 /* Private */,
-       4,    1,   36,    2, 0x0a /* Public */,
-       6,    1,   39,    2, 0x0a /* Public */,
+       1,    0,   44,    2, 0x08 /* Private */,
+       3,    0,   45,    2, 0x08 /* Private */,
+       4,    1,   46,    2, 0x0a /* Public */,
+       6,    1,   49,    2, 0x0a /* Public */,
+       8,    1,   52,    2, 0x0a /* Public */,
+      10,    1,   55,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,    5,
     QMetaType::Void, QMetaType::Int,    7,
+    QMetaType::Void, QMetaType::Int,    9,
+    QMetaType::Void, QMetaType::Bool,   11,
 
        0        // eod
 };
@@ -85,6 +94,8 @@ void Clicker::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 1: _t->check(); break;
         case 2: _t->setClickType((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 3: _t->setActivationMode((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 4: _t->setClickLimit((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 5: _t->enableClickLimit((*reinterpret_cast< bool(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -119,13 +130,13 @@ int Clicker::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 6)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 4;
+        _id -= 6;
     }
     return _id;
 }

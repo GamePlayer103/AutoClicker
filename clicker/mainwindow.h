@@ -2,7 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <clicker.h>
+#include <QCloseEvent>
+#include "clicker.h"
+#include "settings.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,6 +19,8 @@ public:
     ~MainWindow();
 
 private slots:
+    void saveSettings();
+
     void on_singleClick_clicked();
 
     void on_doubleClick_clicked();
@@ -32,5 +36,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Clicker *clicker;
+    Settings *settings;
+    void loadSettings();
+    void closeEvent(QCloseEvent *event);
 };
 #endif // MAINWINDOW_H

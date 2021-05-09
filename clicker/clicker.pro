@@ -18,11 +18,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     clicker.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    settings.cpp
 
 HEADERS += \
     clicker.h \
-    mainwindow.h
+    mainwindow.h \
+    settings.h
 
 FORMS += \
     mainwindow.ui

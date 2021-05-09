@@ -69,7 +69,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(264, 350);
+        MainWindow->resize(262, 328);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout_3 = new QVBoxLayout(centralwidget);

@@ -1,5 +1,6 @@
 # AutoClicker
-![AutoClicker logo](https://github.com/GamePlayer103/AutoClicker/tree/master/logo/logo.png)
+![AutoClicker logo](logo/logo.png)
+##
 Auto clicker made mainly for minecraft, but can be used for everything.
 
 Please don't use it for cheating in multiplayer games! This project is only made for education and for offline games. Try not to disturb others in the game.
@@ -15,7 +16,7 @@ Please don't use it for cheating in multiplayer games! This project is only made
 * [Bugs and suggestions](#bugs-and-suggestions)
 
 ## Screenshots
-![AutoClicker window](https://github.com/GamePlayer103/AutoClicker/tree/master/images/screenshot_1.png)
+![AutoClicker window](images/screenshot_1.png)
 
 ## Features
 * Changing delay between clicks.

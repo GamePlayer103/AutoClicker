@@ -16,6 +16,11 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_singleClick_clicked();
+
+    void on_doubleClick_clicked();
+
 private:
     Ui::MainWindow *ui;
     Clicker *clicker;

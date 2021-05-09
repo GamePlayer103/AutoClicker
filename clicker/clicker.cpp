@@ -13,6 +13,7 @@ Clicker::Clicker(QSpinBox &delay, QLineEdit &activationKey)
     connect(checkTimer, SIGNAL(timeout()), this, SLOT(check()));
 
     isRunning = false;
+    clickType = 1;
 }
 
 void Clicker::start()
@@ -28,9 +29,13 @@ void Clicker::click()
         clickTimer->setInterval(delaySpinBox->value());
 
     //click
-    mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
-    mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-    qDebug() << "Clicked, current delay is: " << delaySpinBox->value();
+    for(int i = 0; i < clickType; i++)
+    {
+        mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+        mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+        qDebug() << "Clicked, current delay is: " << delaySpinBox->value();
+    }
+
 }
 
 void Clicker::check()
@@ -58,4 +63,10 @@ void Clicker::check()
             qDebug() << "Click timer started";
         }
     }
+}
+
+void Clicker::setClickType(int type)
+{
+    clickType = type;
+    qDebug() << "Set click type to: " << type;
 }

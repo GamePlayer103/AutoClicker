@@ -16,3 +16,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+void MainWindow::on_singleClick_clicked()
+{
+    clicker->setClickType(1);
+}
+
+void MainWindow::on_doubleClick_clicked()
+{
+    clicker->setClickType(2);
+}

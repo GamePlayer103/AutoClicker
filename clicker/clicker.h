@@ -15,16 +15,21 @@ class Clicker : public QObject
 public:
     Clicker(QSpinBox &delay, QLineEdit &activationKey);
     void start();
+
 private:
-    int delay();
     QTimer *clickTimer;
     QTimer *checkTimer;
     QSpinBox *delaySpinBox;
     QLineEdit *activationChar;
     bool isRunning;
+    int clickType;
+
 private slots:
     void click();
     void check();
+
+public slots:
+    void setClickType(int type);
 
 };
 

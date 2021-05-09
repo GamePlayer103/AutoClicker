@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>262</width>
-    <height>328</height>
+    <height>347</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -105,6 +105,9 @@
          </item>
          <item>
           <widget class="QSpinBox" name="limit">
+           <property name="minimum">
+            <number>1</number>
+           </property>
            <property name="maximum">
             <number>10000</number>
            </property>
@@ -145,6 +148,9 @@
          </item>
          <item>
           <widget class="QLineEdit" name="activationChar">
+           <property name="text">
+            <string>r</string>
+           </property>
            <property name="maxLength">
             <number>1</number>
            </property>
@@ -257,6 +263,13 @@
        </spacer>
       </item>
      </layout>
+    </item>
+    <item>
+     <widget class="QLabel" name="github">
+      <property name="text">
+       <string>&lt;a href=&quot;https://github.com/GamePlayer103/AutoClicker&quot;&gt;Github&lt;/a&gt;</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

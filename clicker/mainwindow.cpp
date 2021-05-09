@@ -6,6 +6,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    //prevent window from resizing
+    setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+
     clicker = new Clicker(*ui->delay, *ui->activationChar);
     ui->limit->setEnabled(false);
     connect(ui->enableLimit, SIGNAL(toggled(bool)), clicker, SLOT(enableClickLimit(bool)));
@@ -15,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent)
     settings->setSettingsFile("config.json");
 
     loadSettings();
+
+    ui->github->setOpenExternalLinks(true);
 }
 
 MainWindow::~MainWindow()

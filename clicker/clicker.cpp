@@ -1,8 +1,9 @@
 #include "clicker.h"
 
-Clicker::Clicker(QSpinBox &delay)
+Clicker::Clicker(QSpinBox &delay, QLineEdit &activationKey)
 {
     delaySpinBox = &delay;
+    activationChar = &activationKey;
 
     clickTimer = new QTimer(this);
     connect(clickTimer, SIGNAL(timeout()), this, SLOT(click()));
@@ -14,7 +15,6 @@ Clicker::Clicker(QSpinBox &delay)
     isRunning = false;
 }
 
-
 void Clicker::start()
 {
     checkTimer->start();
@@ -23,20 +23,26 @@ void Clicker::start()
 
 void Clicker::click()
 {
-    // set delay
+    //set delay
     if(delaySpinBox->value() != clickTimer->interval())
         clickTimer->setInterval(delaySpinBox->value());
 
-    // click
-    mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+    //click
     mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+    mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
     qDebug() << "Clicked, current delay is: " << delaySpinBox->value();
 }
 
 void Clicker::check()
 {
-    // check than activate button button is clicked
-    if(GetAsyncKeyState(VK_NUMPAD0))
+    //convert QString to char
+    QString text = activationChar->text();
+    QByteArray ba = text.toLocal8Bit();
+    const char *c_str = ba.data();
+    char ch = c_str[0];
+
+    //check than activate button button is clicked
+    if(GetAsyncKeyState(VkKeyScanA(ch)))
     {
         qDebug() << "Activate key clicked";
         if(isRunning)
